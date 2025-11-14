@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Rock Concert</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+        header { background-color: #0077cc; color: white; padding: 15px; text-align: center; }
+        nav { background-color: #eee; padding: 10px; display: flex; justify-content: space-around; }
+        nav a { text-decoration: none; color: #0077cc; font-weight: bold; }
+        main { padding: 20px; }
+        h2, h3 { color: #0077cc; }
+        .summary, .payment { background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        label { display: block; margin-top: 10px; }
+        input { width: 100%; padding: 8px; margin-top: 5px; }
+        .button { display: inline-block; padding: 10px 15px; margin-top: 15px; background-color: #0077cc; color: white; text-decoration: none; border-radius: 5px; text-align: center; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Checkout</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tickets.html">My Tickets</a>
+        <a href="notifications.html">Notifications</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+    <main>
+        <h2>Order Summary</h2>
+        <div class="summary">
+            <p><strong>Event:</strong> Rock Concert</p>
+            <p><strong>Seats:</strong> A2, A3</p>
+            <p><strong>Ticket Cost:</strong> $100</p>
+            <p><strong>Parking:</strong> $10</p>
+            <p><strong>Transit:</strong> $5</p>
+            <p><strong>Total:</strong> $115</p>
+        </div>
+
+        <h2>Payment Information</h2>
+        <div class="payment">
+            <label>Card Number:</label>
+            <input type="text" placeholder="xxxx-xxxx-xxxx-xxxx">
+            <label>Expiry Date:</label>
+            <input type="text" placeholder="MM/YY">
+            <label>CVV:</label>
+            <input type="text" placeholder="123">
+        </div>
+
+        <a href="confirmation.html" class="button">Confirm Purchase</a>
+    </main>
+</body>
+</html>

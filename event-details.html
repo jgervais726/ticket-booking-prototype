@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - Rock Concert</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+        header { background-color: #0077cc; color: white; padding: 15px; text-align: center; }
+        nav { background-color: #eee; padding: 10px; display: flex; justify-content: space-around; }
+        nav a { text-decoration: none; color: #0077cc; font-weight: bold; }
+        main { padding: 20px; }
+        h2, h3 { color: #0077cc; }
+        .seat-map { display: flex; flex-wrap: wrap; max-width: 300px; margin-bottom: 20px; }
+        .seat { width: 40px; height: 40px; margin: 5px; background: #ccc; text-align: center; line-height: 40px; border-radius: 4px; cursor: pointer; }
+        .seat.selected { background-color: #28a745; color: white; }
+        .section-info { margin-bottom: 20px; }
+        .button { display: inline-block; padding: 10px 15px; background-color: #0077cc; color: white; text-decoration: none; border-radius: 5px; }
+        .options { margin-top: 20px; }
+        .options label { display: block; margin-bottom: 5px; }
+        .options input[type="checkbox"] { margin-right: 5px; }
+    </style>
+    <script>
+        function toggleSeat(seat) {
+            seat.classList.toggle('selected');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Event Details</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tickets.html">My Tickets</a>
+        <a href="notifications.html">Notifications</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+    <main>
+        <h2>Test Event</h2>
+        <p>Date: Nov 20, 2025 | Location: City Arena</p>
+        <p>Starting from $50</p>
+
+        <div class="section-info">
+            <h3>Seat Selection</h3>
+            <p>Select your seats. Prices vary by section. Beams marked in red may obstruct views.</p>
+            <div class="seat-map">
+                <div class="seat" onclick="toggleSeat(this)">A1</div>
+                <div class="seat" onclick="toggleSeat(this)">A2</div>
+                <div class="seat" onclick="toggleSeat(this)">A3</div>
+                <div class="seat" onclick="toggleSeat(this)">A4</div>
+                <div class="seat" onclick="toggleSeat(this)" style="background:red;color:white;">A5</div>
+            </div>
+        </div>
+
+        <div class="options">
+            <h3>Parking & Transit</h3>
+            <label><input type="checkbox"> Prepay for Parking ($8)</label>
+            <label><input type="checkbox"> Add Transit Pass ($5)</label>
+            <p>Optional: You can pay for these on the day of the event instead.</p>
+        </div>
+
+        <a href="checkout.html" class="button">Proceed to Checkout</a>
+    </main>
+</body>
+</html>
