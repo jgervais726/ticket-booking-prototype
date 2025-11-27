@@ -87,11 +87,142 @@
         <a href="profile.html">Profile</a>
     </nav>
     <main>
-        <!-- Search Bar -->
-        <div class="search-bar">
-            <input type="text" placeholder="Search for events, venues, or teams...">
-            <button>Search</button>
+        <!-- SEARCH BAR WITH AUTOCOMPLETE -->
+        <div class="search-bar" style="position: relative;">
+            <input id="searchInput" type="text" placeholder="Search for events..." oninput="updateSuggestions()">
+            <button onclick="performSearch()">Search</button>
+
+            <!-- Dropdown suggestion box -->
+            <div id="suggestionBox" 
+                style="position:absolute; top:40px; left:0; width:100%; 
+                        background:white; border:1px solid #ccc; 
+                        display:none; z-index:1000; max-height:200px; 
+                        overflow-y:auto;">
+            </div>
         </div>
+
+        <h2>Search Results</h2>
+        <div id="searchResults" class="event-section"></div>
+        <script>
+// EVENTS LIST 
+const events = [
+    { title: "Test Event", date:"Nov 20, 2025", location:"Frazer Auditorium", price:"$50", link:"event-details.html"},
+    { title: "Leafs vs Habs", date:"Dec 5, 2025", location:"Bell Center", price:"$250", link:"event-details.html"},
+    { title: "Wolves vs Batallions", date:"Nov 25, 2025", location:"Sudbury Arena", price:"$30", link:"event-details.html"},
+    { title: "Local Festival", date:"Nov 22, 2025", location:"Bell Park", price:"Free", link:"event-details.html"},
+    { title: "Taylor Swift Live", date:"Nov 15, 2025", location:"The Moon", price:"$6000", link:"event-details.html"},
+    { title: "Fencing Duel", date:"Dec 15, 2025", location:"Wuhu Island", price:"$400", link:"event-details.html"},
+    { title: "Griffindor vs Slitherin", date:"Jan 2, 2026", location:"Hogwarts", price:"£1", link:"event-details.html"},
+    { title: "F1 Racing", date:"Nov 26, 2025", location:"Radiator Spring", price:"$30", link:"event-details.html"},
+    { title: "Mario Tennis", date:"Dec 12, 2025", location:"Mushroom Kingdom", price:"87 Coins", link:"event-details.html"},
+    { title: "FazCrew Rock Concert", date:"Nov 28, 2025", location:"Freddy Fazbear's Mega Pizzaplex", price:"$100", link:"event-details.html"},
+    { title: "Saja Boys Concert", date:"Jan 31, 2026", location:"Namsan Tower", price:"Free", link:"event-details.html"},
+    { title: "Leopaul's Orchestra", date:"Feb 28, 2026", location:"Albakurky", price:"$35", link:"event-details.html"},
+    { title: "Far Far Away Idols", date:"Dec 15, 2025", location:"Far Far Away Kingdom", price:"$58", link:"event-details.html"},
+    { title: "Loki the Great", date:"Dec 32, 2025", location:"Asgard", price:"$25000", link:"event-details.html"},
+    { title: "The Wizard", date:"Dec 19, 2025", location:"Emerald City", price:"$25", link:"event-details.html"},
+    { title: "Chips and Ice Cream", date:"Nov 17, 2025", location:"Land of Ooo", price:"1 Coin", link:"event-details.html"},
+    { title: "Iron Lung", date:"Dec 1, 2025", location:"Mars", price:"$2200", link:"event-details.html"},
+
+    // Hidden events
+    { title: "Interstellar Orchestra", date:"Apr 4, 2026", location:"Mars Dome", price:"$1200", link:"event-details.html"},
+    { title: "Ultimate Dog Show", date:"Jun 10, 2026", location:"Barkley Arena", price:"$45", link:"event-details.html"}
+];
+
+// AUTOCOMPLETE SUGGESTIONS
+function updateSuggestions() {
+    const query = document.getElementById("searchInput").value.toLowerCase().trim();
+    const suggestionBox = document.getElementById("suggestionBox");
+
+    suggestionBox.innerHTML = "";
+
+    if (query === "") {
+        suggestionBox.style.display = "none";
+        return;
+    }
+
+    const suggestions = events.filter(ev =>
+        ev.title.toLowerCase().includes(query) ||
+        ev.location.toLowerCase().includes(query)
+    );
+
+    if (suggestions.length === 0) {
+        suggestionBox.style.display = "none";
+        return;
+    }
+
+    suggestionBox.style.display = "block";
+
+    // Build suggestion items
+    suggestions.forEach(ev => {
+        const item = document.createElement("div");
+        item.style.padding = "8px";
+        item.style.cursor = "pointer";
+        item.style.borderBottom = "1px solid #eee";
+
+        item.innerHTML = `
+            <strong>${ev.title}</strong><br>
+            <small>${ev.location}</small>
+        `;
+
+        // Clicking the suggestion fills and searches
+        item.onclick = () => {
+            document.getElementById("searchInput").value = ev.title;
+            suggestionBox.style.display = "none";
+            performSearch();
+        };
+
+        suggestionBox.appendChild(item);
+    });
+}
+
+    // MAIN SEARCH FUNCTION
+    function performSearch() {
+        const query = document.getElementById("searchInput").value.toLowerCase().trim();
+        const resultsContainer = document.getElementById("searchResults");
+        const suggestionBox = document.getElementById("suggestionBox");
+
+        suggestionBox.style.display = "none";
+        resultsContainer.innerHTML = "";
+
+        if (query === "") {
+            resultsContainer.innerHTML = "<p>Type something to search events.</p>";
+            return;
+        }
+
+        const results = events.filter(ev =>
+            ev.title.toLowerCase().includes(query) ||
+            ev.location.toLowerCase().includes(query)
+        );
+
+        if (results.length === 0) {
+            resultsContainer.innerHTML = "<p>No events found.</p>";
+            return;
+        }
+
+        // Create event result cards
+        results.forEach(ev => {
+            const card = document.createElement("div");
+            card.className = "event-card";
+            card.innerHTML = `
+                <h3>${ev.title}</h3>
+                <p>Date: ${ev.date}</p>
+                <p>Location: ${ev.location}</p>
+                <p>From ${ev.price}</p>
+                <a href="${ev.link}" class="button">View Seats</a>
+            `;
+            resultsContainer.appendChild(card);
+        });
+    }
+
+    // Hide suggestions if user clicks outside
+    document.addEventListener("click", function(e) {
+        if (!document.querySelector(".search-bar").contains(e.target)) {
+            document.getElementById("suggestionBox").style.display = "none";
+        }
+    });
+    </script>
+
 
         <!-- General Recommendations -->
         <h2>Recommended for You</h2>
