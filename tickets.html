@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tickets</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; }
+        header { background:#0077cc; color:white; padding:15px; text-align:center; }
+        nav { background:#eee; padding:10px; display:flex; justify-content:space-around; }
+        nav a { text-decoration:none; color:#0077cc; font-weight:bold; }
+        main { padding:20px; text-align:center; }
+        .button { display:inline-block; padding:10px 15px; margin-top:20px; background-color:#0077cc; color:white; text-decoration:none; border-radius:5px; cursor:pointer; }
+        /* Modal styling */
+        #modal {
+            display:none;
+            position:fixed;
+            top:50%; left:50%;
+            transform:translate(-50%, -50%);
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 2px 6px rgba(0,0,0,0.2);
+            z-index:1000;
+            text-align:center;
+        }
+        #modal p { margin:0 0 10px 0; }
+        #modal button { padding:5px 10px; }
+        #modal-overlay {
+            display:none;
+            position:fixed;
+            top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.4);
+            z-index:999;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Tickets</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tickets.html">My Tickets</a>
+        <a href="notifications.html">Notifications</a>
+        <a href="profile.html">Profile</a>
+    </nav>
+    <main>
+        <h2>Keep Track of Your Tickets</h2>
+        <p>Sign up or log in to save and view your purchased tickets in one place.</p>
+        <div class="button" onclick="featureNotAvailable()">Sign Up / Log In</div>
+    </main>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay"></div>
+
+    <!-- Modal -->
+    <div id="modal">
+        <p>This feature is not available in the prototype. 🚧</p>
+        <button onclick="closeModal()">OK</button>
+    </div>
+
+    <script>
+    function featureNotAvailable() {
+        document.getElementById("modal").style.display = "block";
+        document.getElementById("modal-overlay").style.display = "block";
+    }
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+        document.getElementById("modal-overlay").style.display = "none";
+    }
+    </script>
+</body>
+</html>
